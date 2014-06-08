@@ -3,5 +3,7 @@
 
     <string name="app_name">TipCalc</string>
     <string name="hello_world">Hello world!</string>
+    <string name="inputLabel">Enter base amount:</string>
+    <string name="outputLabel">Tip:</string>
 
 </resources>
