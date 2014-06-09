@@ -1,6 +1,10 @@
 package com.example.tipcalc;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
+
+import org.apache.commons.io.FileUtils;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,6 +21,8 @@ public class TipCalcMainActivity extends Activity {
 	private SeekBar tip_bar;
 	private TextView tip_value_field;
 
+	private final String TIP_FILENAME = "tip.txt";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,6 +33,9 @@ public class TipCalcMainActivity extends Activity {
 		base_field = (EditText) findViewById(R.id.inputValue);
 		num_people_field = (EditText) findViewById(R.id.partySizeInputValue);
 		tip_value_field = (TextView) findViewById(R.id.tipInputValue);
+
+		// Load the tip value from file if it exists.
+		tip_bar.setProgress(loadTipPercentageFromFile());
 
 		// Initialize the stored tip percentage.
 		updateTipPercentage();
@@ -45,6 +54,7 @@ public class TipCalcMainActivity extends Activity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				updateTipPercentage();
+				saveTipPercentageToFile(progress);
 			}
 		};
 		tip_bar.setOnSeekBarChangeListener(tip_listener);
@@ -119,6 +129,26 @@ public class TipCalcMainActivity extends Activity {
 			tip_per_person_text.setText(format.format(tip_value / num_people));
 		} else {
 			tip_per_person_text.setText(format.format(0));
+		}
+	}
+
+	private int loadTipPercentageFromFile() {
+		File tip_file = new File(getFilesDir(), TIP_FILENAME);
+		int tip_value = 0;
+		try {
+			tip_value = Integer.parseInt(FileUtils.readLines(tip_file).get(0));
+		} catch (IOException e) {
+			System.err.println("IOException: " + e.getMessage());
+		}
+		return tip_value;
+	}
+
+	private void saveTipPercentageToFile(int tip_value) {
+		File tip_file = new File(getFilesDir(), TIP_FILENAME);
+		try {
+			FileUtils.writeStringToFile(tip_file, Integer.toString(tip_value));
+		} catch (IOException e) {
+			System.err.println("IOException: " + e.getMessage());
 		}
 	}
 }
