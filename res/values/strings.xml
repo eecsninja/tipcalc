@@ -8,5 +8,9 @@
     <string name="button10Text">10%</string>
     <string name="button15Text">15%</string>
     <string name="button20Text">20%</string>
+    <string name="partySizeText">Party size:</string>
+    <string name="perPersonLabel">Tip per person</string>
+    <string name="zeroAmount">0.00</string>
+    <string name="numPeopleDefaultValue">1</string>
 
 </resources>

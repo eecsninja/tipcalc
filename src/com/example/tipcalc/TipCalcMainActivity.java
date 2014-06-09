@@ -26,12 +26,11 @@ public class TipCalcMainActivity extends Activity {
 		tip_percentage = NO_TIP_SELECTED;
 
 		// Listen for text input changes.
-		EditText input_field = (EditText) findViewById(R.id.inputValue);
-		input_field.addTextChangedListener(new TextWatcher() {
+		TextWatcher text_watcher = new TextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				computeAndDisplayTipAmount(getInputAmount());
+				computeAndDisplayTipAmount(getInputAmount(), getNumPeople());
 			}
 
 			@Override
@@ -42,7 +41,12 @@ public class TipCalcMainActivity extends Activity {
 			@Override
 			public void afterTextChanged(Editable s) {
 			}
-		});
+		};
+		// Use the same listener for both text input fields.
+		EditText input_field = (EditText) findViewById(R.id.inputValue);
+		input_field.addTextChangedListener(text_watcher);
+		EditText num_people_field = (EditText) findViewById(R.id.partySizeInputValue);
+		num_people_field.addTextChangedListener(text_watcher);
 	}
 
 	public void onButtonClick(View v) {
@@ -62,7 +66,7 @@ public class TipCalcMainActivity extends Activity {
 			break;
 		}
 		// Calculate and show tip.
-		computeAndDisplayTipAmount(getInputAmount());
+		computeAndDisplayTipAmount(getInputAmount(), getNumPeople());
 	}
 
 	private float getInputAmount() {
@@ -76,17 +80,39 @@ public class TipCalcMainActivity extends Activity {
 		return value;
 	}
 
-	private void computeAndDisplayTipAmount(float base_value) {
+	private int getNumPeople() {
+		EditText input_field = (EditText) findViewById(R.id.partySizeInputValue);
+		int value = 0;
+		try {
+			value = Integer.parseInt(input_field.getText().toString());
+		} catch (NumberFormatException e) {
+			System.err.println("Caught exception: " + e.getMessage());
+		}
+		return value;
+	}
+
+	private void computeAndDisplayTipAmount(float base_value, float num_people) {
 		// Do not display anything (not even a zero value) if the tip
 		// percentage hasn't been selected.
 		if (tip_percentage == NO_TIP_SELECTED) {
 			return;
 		}
-		float value = base_value * tip_percentage / 100;
+		float tip_value = base_value * tip_percentage / 100;
 
-		TextView text = (TextView) findViewById(R.id.outputValue);
 		// Make sure to display the right decimal format.
-		text.setText((new DecimalFormat("0.00")).format(value));
+		DecimalFormat format = new DecimalFormat("0.00");
+
+		// Display the total tip.
+		TextView tip_text = (TextView) findViewById(R.id.outputValue);
+		tip_text.setText(format.format(tip_value));
+
+		// Display the tip per person.
+		TextView tip_per_person_text = (TextView) findViewById(R.id.numPeopleOutputValue);
+		if (num_people > 0) {
+			tip_per_person_text.setText(format.format(tip_value / num_people));
+		} else {
+			tip_per_person_text.setText(format.format(0));
+		}
 	}
 
 	// Store the last selected tip percentage.

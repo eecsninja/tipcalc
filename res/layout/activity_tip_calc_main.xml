@@ -25,13 +25,26 @@
         android:text="@string/outputLabel"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <EditText
+        android:id="@+id/inputValue"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button20"
+        android:layout_below="@+id/inputLabel"
+        android:ems="10"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
     <TextView
-        android:id="@+id/outputValue"
+        android:id="@+id/partySizeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/outputLabel"
-        android:layout_alignBottom="@+id/outputLabel"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/inputLabel"
+        android:layout_below="@+id/inputValue"
+        android:layout_marginTop="17dp"
+        android:text="@string/partySizeText"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -39,8 +52,9 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/outputValue"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="19dp"
         android:onClick="onButtonClick"
         android:text="@string/button15Text" />
 
@@ -49,7 +63,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_alignBaseline="@+id/button15"
+        android:layout_alignBottom="@+id/button15"
         android:layout_toRightOf="@+id/button15"
         android:onClick="onButtonClick"
         android:text="@string/button20Text" />
@@ -59,22 +74,51 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/inputValue"
-        android:layout_centerVertical="true"
+        android:layout_alignBaseline="@+id/button15"
+        android:layout_alignBottom="@+id/button15"
+        android:layout_toLeftOf="@+id/button15"
         android:onClick="onButtonClick"
         android:text="@string/button10Text" />
 
     <EditText
-        android:id="@+id/inputValue"
+        android:id="@+id/partySizeInputValue"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/inputLabel"
+        android:layout_below="@+id/partySizeLabel"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="numberDecimal" >
+        android:gravity="center_vertical|center_horizontal"
+        android:inputType="number"
+        android:text="@string/numPeopleDefaultValue" />
 
-        <requestFocus />
-    </EditText>
+    <TextView
+        android:id="@+id/perPersonLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/outputLabel"
+        android:layout_below="@+id/outputValue"
+        android:layout_marginTop="14dp"
+        android:text="@string/perPersonLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/outputValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/outputLabel"
+        android:layout_alignBottom="@+id/outputLabel"
+        android:layout_toRightOf="@+id/button20"
+        android:hint="@string/zeroAmount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/numPeopleOutputValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/perPersonLabel"
+        android:layout_alignBottom="@+id/perPersonLabel"
+        android:layout_alignLeft="@+id/outputValue"
+        android:hint="@string/zeroAmount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
