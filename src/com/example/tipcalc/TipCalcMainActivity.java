@@ -1,11 +1,14 @@
 package com.example.tipcalc;
 
+import java.text.DecimalFormat;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class TipCalcMainActivity extends Activity {
@@ -33,11 +36,8 @@ public class TipCalcMainActivity extends Activity {
 			tip_percentage = 0;
 			break;
 		}
-		// Calculate tip:
-		float tip_value = getInputAmount() * tip_percentage / 100;
-		// TODO: Display tip later. For now, toast the amount.
-		Toast.makeText(getApplicationContext(), "" + tip_value, Toast.LENGTH_SHORT)
-			.show();
+		// Calculate and show tip.
+		displayTipAmount(getInputAmount() * tip_percentage / 100);
 	}
 
 	private float getInputAmount() {
@@ -49,5 +49,11 @@ public class TipCalcMainActivity extends Activity {
 			System.err.println("Caught exception: " + e.getMessage());
 		}
 		return value;
+	}
+
+	private void displayTipAmount(float value) {
+		TextView text = (TextView) findViewById(R.id.outputValue);
+		// Make sure to display the right decimal format.
+		text.setText((new DecimalFormat("0.00")).format(value));
 	}
 }
