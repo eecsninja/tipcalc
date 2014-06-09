@@ -5,5 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="inputLabel">Enter base amount:</string>
     <string name="outputLabel">Tip:</string>
+    <string name="button10Text">10%</string>
+    <string name="button15Text">15%</string>
+    <string name="button20Text">20%</string>
 
 </resources>
