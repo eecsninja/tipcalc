@@ -5,17 +5,6 @@
     tools:context="${packageName}.${activityClass}" >
 
     <TextView
-        android:id="@+id/inputLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/inputLabel"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/outputLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,73 +13,6 @@
         android:layout_marginBottom="78dp"
         android:text="@string/outputLabel"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/inputValue"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button20"
-        android:layout_below="@+id/inputLabel"
-        android:ems="10"
-        android:gravity="center_vertical|center_horizontal"
-        android:inputType="numberDecimal" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/partySizeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/inputLabel"
-        android:layout_below="@+id/inputValue"
-        android:layout_marginTop="17dp"
-        android:text="@string/partySizeText"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/button15"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/outputValue"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
-        android:onClick="onButtonClick"
-        android:text="@string/button15Text" />
-
-    <Button
-        android:id="@+id/button20"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button15"
-        android:layout_alignBottom="@+id/button15"
-        android:layout_toRightOf="@+id/button15"
-        android:onClick="onButtonClick"
-        android:text="@string/button20Text" />
-
-    <Button
-        android:id="@+id/button10"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button15"
-        android:layout_alignBottom="@+id/button15"
-        android:layout_toLeftOf="@+id/button15"
-        android:onClick="onButtonClick"
-        android:text="@string/button10Text" />
-
-    <EditText
-        android:id="@+id/partySizeInputValue"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/partySizeLabel"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:gravity="center_vertical|center_horizontal"
-        android:inputType="number"
-        android:text="@string/numPeopleDefaultValue" />
 
     <TextView
         android:id="@+id/perPersonLabel"
@@ -103,16 +25,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/outputValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/outputLabel"
-        android:layout_alignBottom="@+id/outputLabel"
-        android:layout_toRightOf="@+id/button20"
-        android:hint="@string/zeroAmount"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/numPeopleOutputValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -121,5 +33,88 @@
         android:layout_alignLeft="@+id/outputValue"
         android:hint="@string/zeroAmount"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/partySizeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/inputLabel"
+        android:layout_below="@+id/inputValue"
+        android:layout_marginTop="18dp"
+        android:text="@string/partySizeText"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tipValueLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/partySizeLabel"
+        android:layout_below="@+id/partySizeInputValue"
+        android:layout_marginTop="18dp"
+        android:text="@string/tipValueLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/outputValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/outputLabel"
+        android:layout_alignBottom="@+id/outputLabel"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="28dp"
+        android:hint="@string/zeroAmount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/partySizeInputValue"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/partySizeLabel"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:inputType="number"
+        android:text="@string/numPeopleDefaultValue" />
+
+    <EditText
+        android:id="@+id/inputValue"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/partySizeInputValue"
+        android:layout_below="@+id/inputLabel"
+        android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/inputLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/inputValue"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/inputLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tipInputValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tipValueLabel"
+        android:layout_alignBottom="@+id/tipValueLabel"
+        android:layout_alignRight="@+id/outputValue"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <SeekBar
+        android:id="@+id/tipValueBar"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tipInputValue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp" />
 
 </RelativeLayout>

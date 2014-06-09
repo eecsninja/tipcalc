@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,26 +48,32 @@ public class TipCalcMainActivity extends Activity {
 		input_field.addTextChangedListener(text_watcher);
 		EditText num_people_field = (EditText) findViewById(R.id.partySizeInputValue);
 		num_people_field.addTextChangedListener(text_watcher);
-	}
 
-	public void onButtonClick(View v) {
-		// Determine which button was clicked.
-		switch (v.getId()) {
-		case R.id.button10:
-			tip_percentage = 10;
-			break;
-		case R.id.button15:
-			tip_percentage = 15;
-			break;
-		case R.id.button20:
-			tip_percentage = 20;
-			break;
-		default:
-			tip_percentage = 0;
-			break;
-		}
-		// Calculate and show tip.
-		computeAndDisplayTipAmount(getInputAmount(), getNumPeople());
+		// Listen for seek bar changes.
+		SeekBar.OnSeekBarChangeListener tip_listener = new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				// The seek bar's position value is equivalent to the tip %age.
+				tip_percentage = (float) progress;
+				// Update the tip text field.
+				TextView tip_value_field = (TextView) findViewById(R.id.tipInputValue);
+				tip_value_field.setText("" + progress + "%");
+
+				// Calculate and show tip.
+				computeAndDisplayTipAmount(getInputAmount(), getNumPeople());
+			}
+		};
+		SeekBar tip_bar = (SeekBar) findViewById(R.id.tipValueBar);
+		tip_bar.setOnSeekBarChangeListener(tip_listener);
 	}
 
 	private float getInputAmount() {
