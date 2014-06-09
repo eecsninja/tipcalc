@@ -32,6 +32,7 @@
         android:layout_alignRight="@+id/button20"
         android:layout_below="@+id/inputLabel"
         android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
         android:inputType="numberDecimal" >
 
         <requestFocus />
