@@ -41,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:onClick="onButtonClick"
         android:text="Button" />
 
     <Button
@@ -50,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/button15"
+        android:onClick="onButtonClick"
         android:text="Button" />
 
     <Button
@@ -59,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/outputLabel"
+        android:onClick="onButtonClick"
         android:text="Button" />
 
     <EditText
