@@ -11,8 +11,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class TipCalcMainActivity extends Activity {
-
-	private final float NO_TIP_SELECTED = -1;
+	// Store references to the various view elements.
+	private SeekBar tip_bar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,14 +20,35 @@ public class TipCalcMainActivity extends Activity {
 		setContentView(R.layout.activity_tip_calc_main);
 
 		// Initialize the stored tip percentage.
-		tip_percentage = NO_TIP_SELECTED;
+		updateTipPercentage(0.0f);
+
+		// Listen for seek bar changes.
+		SeekBar.OnSeekBarChangeListener tip_listener = new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				updateTipPercentage(progress);
+			}
+		};
+		tip_bar = (SeekBar) findViewById(R.id.tipValueBar);
+		tip_bar.setOnSeekBarChangeListener(tip_listener);
 
 		// Listen for text input changes.
 		TextWatcher text_watcher = new TextWatcher() {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				computeAndDisplayTipAmount(getInputAmount(), getNumPeople());
+				computeAndDisplayTipAmount(getInputAmount(),
+										   tip_bar.getProgress(),
+										   getNumPeople());
 			}
 
 			@Override
@@ -44,32 +65,16 @@ public class TipCalcMainActivity extends Activity {
 		input_field.addTextChangedListener(text_watcher);
 		EditText num_people_field = (EditText) findViewById(R.id.partySizeInputValue);
 		num_people_field.addTextChangedListener(text_watcher);
+	}
 
-		// Listen for seek bar changes.
-		SeekBar.OnSeekBarChangeListener tip_listener = new SeekBar.OnSeekBarChangeListener() {
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
-			}
+	private void updateTipPercentage(float progress) {
+		// The seek bar's position value is equivalent to the tip %age.
+		// Update the tip text field.
+		TextView tip_value_field = (TextView) findViewById(R.id.tipInputValue);
+		tip_value_field.setText("" + progress + "%");
 
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar) {
-			}
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
-				// The seek bar's position value is equivalent to the tip %age.
-				tip_percentage = (float) progress;
-				// Update the tip text field.
-				TextView tip_value_field = (TextView) findViewById(R.id.tipInputValue);
-				tip_value_field.setText("" + progress + "%");
-
-				// Calculate and show tip.
-				computeAndDisplayTipAmount(getInputAmount(), getNumPeople());
-			}
-		};
-		SeekBar tip_bar = (SeekBar) findViewById(R.id.tipValueBar);
-		tip_bar.setOnSeekBarChangeListener(tip_listener);
+		// Calculate and show tip.
+		computeAndDisplayTipAmount(getInputAmount(), progress, getNumPeople());
 	}
 
 	private float getInputAmount() {
@@ -94,12 +99,9 @@ public class TipCalcMainActivity extends Activity {
 		return value;
 	}
 
-	private void computeAndDisplayTipAmount(float base_value, float num_people) {
-		// Do not display anything (not even a zero value) if the tip
-		// percentage hasn't been selected.
-		if (tip_percentage == NO_TIP_SELECTED) {
-			return;
-		}
+	private void computeAndDisplayTipAmount(float base_value,
+											float tip_percentage,
+											float num_people) {
 		float tip_value = base_value * tip_percentage / 100;
 
 		// Make sure to display the right decimal format.
@@ -117,7 +119,4 @@ public class TipCalcMainActivity extends Activity {
 			tip_per_person_text.setText(format.format(0));
 		}
 	}
-
-	// Store the last selected tip percentage.
-	private float tip_percentage;
 }
