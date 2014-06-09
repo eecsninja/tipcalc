@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/perPersonLabel"
         android:layout_alignBottom="@+id/perPersonLabel"
-        android:layout_alignLeft="@+id/outputValue"
+        android:layout_alignRight="@id/outputValue"
         android:hint="@string/zeroAmount"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
