@@ -29,7 +29,7 @@ public class TipCalcMainActivity extends Activity {
 		tip_value_field = (TextView) findViewById(R.id.tipInputValue);
 
 		// Initialize the stored tip percentage.
-		updateTipPercentage(0.0f);
+		updateTipPercentage();
 
 		// Listen for seek bar changes.
 		SeekBar.OnSeekBarChangeListener tip_listener = new SeekBar.OnSeekBarChangeListener() {
@@ -44,7 +44,7 @@ public class TipCalcMainActivity extends Activity {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
-				updateTipPercentage(progress);
+				updateTipPercentage();
 			}
 		};
 		tip_bar.setOnSeekBarChangeListener(tip_listener);
@@ -71,10 +71,10 @@ public class TipCalcMainActivity extends Activity {
 		base_field.addTextChangedListener(text_watcher);
 	}
 
-	private void updateTipPercentage(float progress) {
+	private void updateTipPercentage() {
 		// The seek bar's position value is equivalent to the tip %age.
 		// Update the tip text field.
-		tip_value_field.setText("" + progress + "%");
+		tip_value_field.setText("" + tip_bar.getProgress() + "%");
 
 		// Calculate and show tip.
 		computeAndDisplayTipAmount();
