@@ -12,12 +12,21 @@ import android.widget.TextView;
 
 public class TipCalcMainActivity extends Activity {
 	// Store references to the various view elements.
+	private EditText base_field;
+	private EditText num_people_field;
 	private SeekBar tip_bar;
+	private TextView tip_value_field;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tip_calc_main);
+
+		// Initialize view element handles.
+		tip_bar = (SeekBar) findViewById(R.id.tipValueBar);
+		base_field = (EditText) findViewById(R.id.inputValue);
+		num_people_field = (EditText) findViewById(R.id.partySizeInputValue);
+		tip_value_field = (TextView) findViewById(R.id.tipInputValue);
 
 		// Initialize the stored tip percentage.
 		updateTipPercentage(0.0f);
@@ -38,7 +47,6 @@ public class TipCalcMainActivity extends Activity {
 				updateTipPercentage(progress);
 			}
 		};
-		tip_bar = (SeekBar) findViewById(R.id.tipValueBar);
 		tip_bar.setOnSeekBarChangeListener(tip_listener);
 
 		// Listen for text input changes.
@@ -46,9 +54,7 @@ public class TipCalcMainActivity extends Activity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				computeAndDisplayTipAmount(getInputAmount(),
-										   tip_bar.getProgress(),
-										   getNumPeople());
+				computeAndDisplayTipAmount();
 			}
 
 			@Override
@@ -61,27 +67,23 @@ public class TipCalcMainActivity extends Activity {
 			}
 		};
 		// Use the same listener for both text input fields.
-		EditText input_field = (EditText) findViewById(R.id.inputValue);
-		input_field.addTextChangedListener(text_watcher);
-		EditText num_people_field = (EditText) findViewById(R.id.partySizeInputValue);
 		num_people_field.addTextChangedListener(text_watcher);
+		base_field.addTextChangedListener(text_watcher);
 	}
 
 	private void updateTipPercentage(float progress) {
 		// The seek bar's position value is equivalent to the tip %age.
 		// Update the tip text field.
-		TextView tip_value_field = (TextView) findViewById(R.id.tipInputValue);
 		tip_value_field.setText("" + progress + "%");
 
 		// Calculate and show tip.
-		computeAndDisplayTipAmount(getInputAmount(), progress, getNumPeople());
+		computeAndDisplayTipAmount();
 	}
 
 	private float getInputAmount() {
-		EditText input_field = (EditText) findViewById(R.id.inputValue);
 		float value = 0.0f;
 		try {
-			value = Float.parseFloat(input_field.getText().toString());
+			value = Float.parseFloat(base_field.getText().toString());
 		} catch (NumberFormatException e) {
 			System.err.println("Caught exception: " + e.getMessage());
 		}
@@ -89,19 +91,19 @@ public class TipCalcMainActivity extends Activity {
 	}
 
 	private int getNumPeople() {
-		EditText input_field = (EditText) findViewById(R.id.partySizeInputValue);
 		int value = 0;
 		try {
-			value = Integer.parseInt(input_field.getText().toString());
+			value = Integer.parseInt(num_people_field.getText().toString());
 		} catch (NumberFormatException e) {
 			System.err.println("Caught exception: " + e.getMessage());
 		}
 		return value;
 	}
 
-	private void computeAndDisplayTipAmount(float base_value,
-											float tip_percentage,
-											float num_people) {
+	private void computeAndDisplayTipAmount() {
+		float base_value = getInputAmount();
+		float tip_percentage = tip_bar.getProgress();
+		float num_people = getNumPeople();
 		float tip_value = base_value * tip_percentage / 100;
 
 		// Make sure to display the right decimal format.
