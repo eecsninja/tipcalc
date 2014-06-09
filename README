@@ -1,7 +1,7 @@
 TipCalc: A tip calculator app
 
 Project 1 of CodePath Android Bootcamp.
-Time to complete: one hour
+Time to complete: 2 hours
 
 Completed stories
 =================
@@ -11,3 +11,6 @@ Required:
  User can select between tip amounts (i.e 10%, 15%, 20%)
  Upon selecting tip amount, formatted tip value is displayed
 
+Optional:
+ User changes the total amount and updated tip is reflected automatically
+ User can select how many ways to split the tip
