@@ -164,7 +164,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/outputValue"
+        android:id="@+id/totalTipValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/perPersonLabel"
@@ -173,11 +173,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/numPeopleOutputValue"
+        android:id="@+id/tipPerPersonValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/perPersonLabel"
-        android:layout_alignLeft="@+id/outputValue"
+        android:layout_alignLeft="@+id/totalTipValue"
         android:layout_alignRight="@+id/tipInputValue"
         android:hint="@string/zeroAmount"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -198,7 +198,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/totalPerPersonLabel"
         android:layout_alignBottom="@+id/totalPerPersonLabel"
-        android:layout_alignRight="@+id/numPeopleOutputValue"
+        android:layout_alignRight="@+id/tipPerPersonValue"
         android:hint="@string/zeroAmount"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

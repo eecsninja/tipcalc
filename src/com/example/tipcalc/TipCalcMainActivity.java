@@ -200,11 +200,11 @@ public class TipCalcMainActivity extends Activity {
 		DecimalFormat format = new DecimalFormat("0.00");
 
 		// Display the total tip.
-		TextView tip_text = (TextView) findViewById(R.id.outputValue);
+		TextView tip_text = (TextView) findViewById(R.id.totalTipValue);
 		tip_text.setText(format.format(tip_value));
 
 		// Display the tip per person.
-		TextView tip_per_person_text = (TextView) findViewById(R.id.numPeopleOutputValue);
+		TextView tip_per_person_text = (TextView) findViewById(R.id.tipPerPersonValue);
 		TextView total_per_person_text = (TextView) findViewById(R.id.totalPerPersonValue);
 		if (num_people > 0) {
 			tip_per_person_text.setText(format.format(tip_value / num_people));
