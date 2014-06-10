@@ -205,10 +205,13 @@ public class TipCalcMainActivity extends Activity {
 
 		// Display the tip per person.
 		TextView tip_per_person_text = (TextView) findViewById(R.id.numPeopleOutputValue);
+		TextView total_per_person_text = (TextView) findViewById(R.id.totalPerPersonValue);
 		if (num_people > 0) {
 			tip_per_person_text.setText(format.format(tip_value / num_people));
+			total_per_person_text.setText(format.format((base_value + tip_value) / num_people));
 		} else {
 			tip_per_person_text.setText(format.format(0));
+			total_per_person_text.setText(format.format(0));
 		}
 	}
 

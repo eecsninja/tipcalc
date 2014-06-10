@@ -15,5 +15,6 @@
     <string name="tipValueLabel">Tip percentage</string>
     <string name="loadPresetLabel">Load:</string>
     <string name="saveButtonString">SAVE</string>
+    <string name="totalPerPersonLabel">Total per person:</string>
 
 </resources>
