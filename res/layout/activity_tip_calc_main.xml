@@ -4,34 +4,82 @@
     android:layout_height="match_parent"
     tools:context="${packageName}.${activityClass}" >
 
-    <TextView
-        android:id="@+id/outputLabel"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/loadButton2"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/inputLabel"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="78dp"
-        android:text="@string/outputLabel"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_below="@+id/tipValueBar"
+        android:layout_marginTop="22dp"
+        android:layout_toRightOf="@+id/perPersonLabel" />
 
-    <TextView
-        android:id="@+id/perPersonLabel"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/loadButton3"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/outputLabel"
-        android:layout_below="@+id/outputValue"
+        android:layout_alignBaseline="@+id/loadButton2"
+        android:layout_alignBottom="@+id/loadButton2"
+        android:layout_toRightOf="@+id/loadButton2" />
+
+    <Button
+        android:id="@+id/loadButton1"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/loadButton2"
+        android:layout_alignBottom="@+id/loadButton2"
+        android:layout_toLeftOf="@+id/loadButton2" />
+
+    <Button
+        android:id="@+id/saveButton2"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loadButton2"
         android:layout_marginTop="14dp"
-        android:text="@string/perPersonLabel"
+        android:layout_toRightOf="@+id/loadButton1" />
+
+    <Button
+        android:id="@+id/saveButton3"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/saveButton2"
+        android:layout_alignBottom="@+id/saveButton2"
+        android:layout_toRightOf="@+id/saveButton2" />
+
+    <Button
+        android:id="@+id/saveButton1"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/saveButton2"
+        android:layout_alignBottom="@+id/saveButton2"
+        android:layout_toLeftOf="@+id/saveButton2" />
+
+    <TextView
+        android:id="@+id/saveLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/saveButton1"
+        android:layout_alignBottom="@+id/saveButton1"
+        android:layout_alignLeft="@+id/outputLabel"
+        android:text="@string/savePresetLabel"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/numPeopleOutputValue"
+        android:id="@+id/loadLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/perPersonLabel"
-        android:layout_alignBottom="@+id/perPersonLabel"
-        android:layout_alignRight="@id/outputValue"
-        android:hint="@string/zeroAmount"
+        android:layout_alignBaseline="@+id/loadButton1"
+        android:layout_alignBottom="@+id/loadButton1"
+        android:layout_alignLeft="@+id/saveLabel"
+        android:text="@string/loadPresetLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/inputLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tipValueBar"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/inputLabel"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -39,8 +87,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/inputLabel"
-        android:layout_below="@+id/inputValue"
-        android:layout_marginTop="18dp"
+        android:layout_below="@+id/inputLabel"
+        android:layout_marginTop="16dp"
         android:text="@string/partySizeText"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -49,39 +97,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/partySizeLabel"
-        android:layout_below="@+id/partySizeInputValue"
-        android:layout_marginTop="18dp"
+        android:layout_below="@+id/partySizeLabel"
+        android:layout_marginTop="16dp"
         android:text="@string/tipValueLabel"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/outputValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/outputLabel"
-        android:layout_alignBottom="@+id/outputLabel"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="28dp"
-        android:hint="@string/zeroAmount"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/partySizeInputValue"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/partySizeLabel"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:gravity="center_vertical|center_horizontal"
-        android:inputType="number"
-        android:text="@string/numPeopleDefaultValue" />
 
     <EditText
         android:id="@+id/inputValue"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/partySizeInputValue"
-        android:layout_below="@+id/inputLabel"
+        android:layout_alignTop="@+id/inputLabel"
+        android:layout_toRightOf="@+id/loadButton1"
         android:ems="10"
         android:gravity="center_vertical|center_horizontal"
         android:inputType="numberDecimal" >
@@ -89,16 +115,17 @@
         <requestFocus />
     </EditText>
 
-    <TextView
-        android:id="@+id/inputLabel"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/partySizeInputValue"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/inputValue"
-        android:layout_marginRight="18dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/inputLabel"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignBaseline="@+id/partySizeLabel"
+        android:layout_alignBottom="@+id/partySizeLabel"
+        android:layout_alignLeft="@+id/inputValue"
+        android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:inputType="number"
+        android:text="@string/numPeopleDefaultValue" />
 
     <TextView
         android:id="@+id/tipInputValue"
@@ -106,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/tipValueLabel"
         android:layout_alignBottom="@+id/tipValueLabel"
-        android:layout_alignRight="@+id/outputValue"
+        android:layout_alignRight="@+id/partySizeInputValue"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <SeekBar
@@ -115,6 +142,45 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tipInputValue"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp" />
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/outputLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tipValueBar"
+        android:layout_below="@+id/saveButton1"
+        android:layout_marginTop="20dp"
+        android:text="@string/outputLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/perPersonLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/outputLabel"
+        android:layout_below="@+id/outputLabel"
+        android:layout_marginTop="16dp"
+        android:text="@string/perPersonLabel"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/outputValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/perPersonLabel"
+        android:layout_alignRight="@+id/tipInputValue"
+        android:hint="@string/zeroAmount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/numPeopleOutputValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/perPersonLabel"
+        android:layout_alignLeft="@+id/outputValue"
+        android:layout_alignRight="@+id/tipInputValue"
+        android:hint="@string/zeroAmount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
