@@ -14,6 +14,6 @@
     <string name="numPeopleDefaultValue">1</string>
     <string name="tipValueLabel">Tip percentage</string>
     <string name="loadPresetLabel">Load:</string>
-    <string name="savePresetLabel">Save:</string>
+    <string name="saveButtonString">SAVE</string>
 
 </resources>

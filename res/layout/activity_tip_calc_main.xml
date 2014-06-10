@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tipValueBar"
         android:layout_marginTop="22dp"
-        android:layout_toRightOf="@+id/perPersonLabel" />
+        android:layout_toRightOf="@+id/perPersonLabel"
+        android:onClick="onButtonClick" />
 
     <Button
         android:id="@+id/loadButton3"
@@ -18,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/loadButton2"
         android:layout_alignBottom="@+id/loadButton2"
-        android:layout_toRightOf="@+id/loadButton2" />
+        android:layout_toRightOf="@+id/loadButton2"
+        android:onClick="onButtonClick" />
 
     <Button
         android:id="@+id/loadButton1"
@@ -26,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/loadButton2"
         android:layout_alignBottom="@+id/loadButton2"
-        android:layout_toLeftOf="@+id/loadButton2" />
+        android:layout_toLeftOf="@+id/loadButton2"
+        android:onClick="onButtonClick" />
 
     <Button
         android:id="@+id/saveButton2"
@@ -34,7 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/loadButton2"
         android:layout_marginTop="14dp"
-        android:layout_toRightOf="@+id/loadButton1" />
+        android:layout_toRightOf="@+id/loadButton1"
+        android:onClick="onButtonClick"
+        android:text="@string/saveButtonString" />
 
     <Button
         android:id="@+id/saveButton3"
@@ -42,7 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/saveButton2"
         android:layout_alignBottom="@+id/saveButton2"
-        android:layout_toRightOf="@+id/saveButton2" />
+        android:layout_toRightOf="@+id/saveButton2"
+        android:onClick="onButtonClick"
+        android:text="@string/saveButtonString" />
 
     <Button
         android:id="@+id/saveButton1"
@@ -50,17 +57,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/saveButton2"
         android:layout_alignBottom="@+id/saveButton2"
-        android:layout_toLeftOf="@+id/saveButton2" />
-
-    <TextView
-        android:id="@+id/saveLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/saveButton1"
-        android:layout_alignBottom="@+id/saveButton1"
-        android:layout_alignLeft="@+id/outputLabel"
-        android:text="@string/savePresetLabel"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_toLeftOf="@+id/saveButton2"
+        android:onClick="onButtonClick"
+        android:text="@string/saveButtonString" />
 
     <TextView
         android:id="@+id/loadLabel"
@@ -68,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/loadButton1"
         android:layout_alignBottom="@+id/loadButton1"
-        android:layout_alignLeft="@+id/saveLabel"
+        android:layout_alignLeft="@+id/outputLabel"
         android:text="@string/loadPresetLabel"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

@@ -3,6 +3,8 @@ package com.example.tipcalc;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
@@ -10,6 +12,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -21,7 +25,17 @@ public class TipCalcMainActivity extends Activity {
 	private SeekBar tip_bar;
 	private TextView tip_value_field;
 
-	private final String TIP_FILENAME = "tip.txt";
+	// Button arrays.
+	private ArrayList<Button> loadButtons;
+	private ArrayList<Button> saveButtons;
+
+	// Store the preset values in this file.
+	private final String PRESETS_FILENAME = "tipcalc.txt";
+	// Number of preset tip values, plus an array of them.
+	private final int NUM_PRESETS = 3;
+	private ArrayList<Integer> presets;
+
+	private final int MAX_TIP = 100;	// Do not let tip go over 100%.
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +48,20 @@ public class TipCalcMainActivity extends Activity {
 		num_people_field = (EditText) findViewById(R.id.partySizeInputValue);
 		tip_value_field = (TextView) findViewById(R.id.tipInputValue);
 
-		// Load the tip value from file if it exists.
-		tip_bar.setProgress(loadTipPercentageFromFile());
+		loadButtons = new ArrayList<Button>();
+		loadButtons.add((Button) findViewById(R.id.loadButton1));
+		loadButtons.add((Button) findViewById(R.id.loadButton2));
+		loadButtons.add((Button) findViewById(R.id.loadButton3));
+		saveButtons = new ArrayList<Button>();
+		saveButtons.add((Button) findViewById(R.id.saveButton1));
+		saveButtons.add((Button) findViewById(R.id.saveButton2));
+		saveButtons.add((Button) findViewById(R.id.saveButton3));
+
+		// Load preset tip values from file.
+		loadPresetsFromFile();
+
+		// Initialize tip bar.
+		tip_bar.setProgress(0);
 
 		// Initialize the stored tip percentage.
 		updateTipPercentage();
@@ -54,7 +80,6 @@ public class TipCalcMainActivity extends Activity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				updateTipPercentage();
-				saveTipPercentageToFile(progress);
 			}
 		};
 		tip_bar.setOnSeekBarChangeListener(tip_listener);
@@ -79,6 +104,61 @@ public class TipCalcMainActivity extends Activity {
 		// Use the same listener for both text input fields.
 		num_people_field.addTextChangedListener(text_watcher);
 		base_field.addTextChangedListener(text_watcher);
+	}
+
+	public void onButtonClick(View v) {
+		boolean do_load = false;		// Indicates the action to take.
+		int button_index = 0;		// Selects a button (0-2).
+		switch (v.getId()) {
+		// Three preset load buttons.
+		case R.id.loadButton1:
+			do_load = true;
+			button_index = 0;
+			break;
+		case R.id.loadButton2:
+			do_load = true;
+			button_index = 1;
+			break;
+		case R.id.loadButton3:
+			do_load = true;
+			button_index = 2;
+			break;
+		// Three preset save buttons.
+		case R.id.saveButton1:
+			do_load = false;
+			button_index = 0;
+			break;
+		case R.id.saveButton2:
+			do_load = false;
+			button_index = 1;
+			break;
+		case R.id.saveButton3:
+			do_load = false;
+			button_index = 2;
+			break;
+		default:
+			return;
+		}
+
+		// Handle loading and saving.
+		if (do_load) {
+			// Load a preset.
+			try {
+				tip_bar.setProgress(presets.get(button_index));
+			} catch (IndexOutOfBoundsException e) {
+				System.err.println("Caught exception: " + e.getMessage());
+			}
+			computeAndDisplayTipAmount();
+		} else {
+			// Save as a preset.
+			try {
+				presets.set(button_index, tip_bar.getProgress());
+			} catch (IndexOutOfBoundsException e) {
+				System.err.println("Caught exception: " + e.getMessage());
+			}
+			savePresetsToFile();
+			updatePresetButton(loadButtons.get(button_index), presets.get(button_index));
+		}
 	}
 
 	private void updateTipPercentage() {
@@ -132,21 +212,39 @@ public class TipCalcMainActivity extends Activity {
 		}
 	}
 
-	private int loadTipPercentageFromFile() {
-		File tip_file = new File(getFilesDir(), TIP_FILENAME);
-		int tip_value = 0;
+	private void updatePresetButton(Button button, int value) {
+		button.setText("" + value + "%");
+	}
+
+	private void loadPresetsFromFile() {
+		File tip_file = new File(getFilesDir(), PRESETS_FILENAME);
+		presets = new ArrayList<Integer>();		// Initialize presets.
 		try {
-			tip_value = Integer.parseInt(FileUtils.readLines(tip_file).get(0));
+			List<String> file_lines = FileUtils.readLines(tip_file);
+			for (int i = 0; i < file_lines.size() && i < NUM_PRESETS; ++i) {
+				// Read in the value and fit it within a reasonable range.
+				int value = Integer.parseInt(file_lines.get(i));
+				if (value < 0)
+					value = 0;
+				else if (value > MAX_TIP)
+					value = MAX_TIP;
+				presets.add(value);
+				// Update the button text to reflect the tip value.
+				updatePresetButton(loadButtons.get(i), value);
+			}
 		} catch (IOException e) {
 			System.err.println("IOException: " + e.getMessage());
 		}
-		return tip_value;
+		// Make sure |presets| has |NUM_PRESETS| elements.
+		while (presets.size() < NUM_PRESETS) {
+			presets.add(0);
+		}
 	}
 
-	private void saveTipPercentageToFile(int tip_value) {
-		File tip_file = new File(getFilesDir(), TIP_FILENAME);
+	private void savePresetsToFile() {
+		File tip_file = new File(getFilesDir(), PRESETS_FILENAME);
 		try {
-			FileUtils.writeStringToFile(tip_file, Integer.toString(tip_value));
+			FileUtils.writeLines(tip_file, null, presets);
 		} catch (IOException e) {
 			System.err.println("IOException: " + e.getMessage());
 		}
