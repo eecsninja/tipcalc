@@ -159,7 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/outputLabel"
         android:layout_below="@+id/outputLabel"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:text="@string/perPersonLabel"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -167,7 +167,7 @@
         android:id="@+id/totalTipValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/perPersonLabel"
+        android:layout_alignBaseline="@+id/outputLabel"
         android:layout_alignRight="@+id/tipInputValue"
         android:hint="@string/zeroAmount"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -177,8 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/perPersonLabel"
-        android:layout_alignLeft="@+id/totalTipValue"
-        android:layout_alignRight="@+id/tipInputValue"
+        android:layout_alignRight="@+id/totalTipValue"
         android:hint="@string/zeroAmount"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -188,7 +187,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/perPersonLabel"
         android:layout_below="@+id/perPersonLabel"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:text="@string/totalPerPersonLabel"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -197,8 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/totalPerPersonLabel"
-        android:layout_alignBottom="@+id/totalPerPersonLabel"
-        android:layout_alignRight="@+id/tipPerPersonValue"
+        android:layout_alignRight="@+id/totalTipValue"
         android:hint="@string/zeroAmount"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
