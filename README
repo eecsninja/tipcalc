@@ -17,3 +17,8 @@ Optional:
  User can select custom tip percentage if desired
  User can edit preset tip percentages and have them persist across launches
  Experiment with trying input widgets to replace the buttons and/or textviews
+
+Note: No currency symbols are shown in the app. This is intentional, as tip
+calculation is independent of the currency being used.
+
+See TipCalcDemo.gif for a demo recording of the app in use.
